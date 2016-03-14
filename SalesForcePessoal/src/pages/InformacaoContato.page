@@ -1,0 +1,74 @@
+<apex:page standardController="Contact" extensions="ControllerArvoreAtendimento" showheader="false" standardStylesheets="false" >
+  
+	<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+			
+			<link rel='stylesheet' type='text/css' href="{!URLFOR($Resource.BootStrapTable, 'bootstrap-table-master/docs/assets/bootstrap/css/bootstrap.min.css')}" />		
+			<link rel='stylesheet' type='text/css' href="{!URLFOR($Resource.BootStrapTable, 'bootstrap-table-master/src/bootstrap-table.css')}" />
+			
+			<script type='text/javascript' src="{!URLFOR($Resource.BootStrapJquery, 'lib/jquery.min.js')}"></script>          
+        	<script type='text/javascript' src="{!URLFOR($Resource.BootStrapJquery, 'lib/jquery-ui.custom.min.js')}"></script> 
+   			
+			<link rel='stylesheet' type='text/css' href="{!URLFOR($Resource.BootStrap, 'BootStrap/bootstrap.min.css')}"/> 
+			<script type='text/javascript' src="{!URLFOR($Resource.BootStrap, 'BootStrap/bootstrap.min.js')}"></script>		
+			<script type='text/javascript' src="{!URLFOR($Resource.BootStrap, 'BootStrap/run_prettify.js')}"></script>
+			<link rel='stylesheet' type='text/css' href="{!URLFOR($Resource.BootStrap, 'BootStrap/bootstrap-dialog.css')}"/>
+			<script type='text/javascript' src="{!URLFOR($Resource.BootStrap, 'BootStrap/bootstrap-dialog.js')}"></script>	
+	</head>
+	
+	<style>
+	
+		.spacerButton {			   
+			    margin-top: 25px; /* define margin as you see fit */			   	  
+		}
+		
+		.spacerDiv{
+			margin-top: 10px; /* define margin as you see fit */
+		    margin-left: 10px;
+		    margin-right: 10px;	
+		
+		}
+		
+	</style>
+	 
+	<apex:form >
+	
+		<div class="spacerDiv">
+	
+			<div class="row">
+				<h2 class="navbar-text">{!Contact.name}</h2>
+			</div> 
+		
+			<div class="row">
+						
+				<div class = "col-md-2">					
+					<div class="input-group">				
+				  		<span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt"></span></span>		  		
+				  		<input id="Telefone1" type="text" class="form-control" maxlength="14" placeholder="Telefone" value="{!Contact.Phone}"/>
+					</div>	  
+				</div>
+														
+				<div class = "col-md-2">					
+					<div class="input-group">				
+				  		<span class="input-group-addon"><span class="glyphicon glyphicon-earphone"></span></span>		  		
+				  		<input id="Telefone2" type="text" class="form-control" maxlength="14" placeholder="Celular" value="{!Contact.MobilePhone}"/>
+					</div>	  
+				</div>
+														
+				<div class = "col-md-2">					
+					<div class="input-group">				
+				  		<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>		  		
+				  		<input id="Email" type="text" class="form-control" maxlength="255" placeholder="E-mail" value="{!Contact.Email}"/>
+					</div>	  
+				</div>
+				
+				<div class = "col-md-2">
+					<a href="#" class="btn btn-primary" role="button">Atualizar</a> 
+				</div>			
+			</div>
+			
+		</div>	
+	
+	</apex:form>
+
+</apex:page>

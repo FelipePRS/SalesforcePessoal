@@ -1,0 +1,515 @@
+<apex:page standardController="Case" extensions="ControllerArvoreAtendimento" showheader="false" standardStylesheets="false" >
+  
+	<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+			<script type='text/javascript' src="{!URLFOR($Resource.BootStrapJquery, 'lib/jquery.min.js')}"></script>          
+        	<script type='text/javascript' src="{!URLFOR($Resource.BootStrapJquery, 'lib/jquery-ui.custom.min.js')}"></script> 
+   			
+			<link rel='stylesheet' type='text/css' href="{!URLFOR($Resource.BootStrap, 'BootStrap/bootstrap.min.css')}"/> 
+			<script type='text/javascript' src="{!URLFOR($Resource.BootStrap, 'BootStrap/bootstrap.min.js')}"></script>		
+			<script type='text/javascript' src="{!URLFOR($Resource.BootStrap, 'BootStrap/run_prettify.js')}"></script>
+			<link rel='stylesheet' type='text/css' href="{!URLFOR($Resource.BootStrap, 'BootStrap/bootstrap-dialog.css')}"/>
+			<script type='text/javascript' src="{!URLFOR($Resource.BootStrap, 'BootStrap/bootstrap-dialog.js')}"></script>	
+	</head>
+	
+	<style>
+		
+		#circularG{
+			position:relative;
+			width:30px;
+			height:30px
+		}
+		
+		.circularG{
+			position:absolute;
+			background-color:#000000;
+			width:7px;
+			height:7px;
+			-moz-border-radius:5px;
+			-moz-animation-name:bounce_circularG;
+			-moz-animation-duration:1.04s;
+			-moz-animation-iteration-count:infinite;
+			-moz-animation-direction:linear;
+			-webkit-border-radius:5px;
+			-webkit-animation-name:bounce_circularG;
+			-webkit-animation-duration:1.04s;
+			-webkit-animation-iteration-count:infinite;
+			-webkit-animation-direction:linear;
+			-ms-border-radius:5px;
+			-ms-animation-name:bounce_circularG;
+			-ms-animation-duration:1.04s;
+			-ms-animation-iteration-count:infinite;
+			-ms-animation-direction:linear;
+			-o-border-radius:5px;
+			-o-animation-name:bounce_circularG;
+			-o-animation-duration:1.04s;
+			-o-animation-iteration-count:infinite;
+			-o-animation-direction:linear;
+			border-radius:5px;
+			animation-name:bounce_circularG;
+			animation-duration:1.04s;
+			animation-iteration-count:infinite;
+			animation-direction:linear;
+		}
+		
+		#circularG_1{
+			left:0;
+			top:12px;
+			-moz-animation-delay:0.39s;
+			-webkit-animation-delay:0.39s;
+			-ms-animation-delay:0.39s;
+			-o-animation-delay:0.39s;
+			animation-delay:0.39s;
+		}
+		
+		#circularG_2{
+			left:3px;
+			top:3px;
+			-moz-animation-delay:0.52s;
+			-webkit-animation-delay:0.52s;
+			-ms-animation-delay:0.52s;
+			-o-animation-delay:0.52s;
+			animation-delay:0.52s;
+		}
+		
+		#circularG_3{
+			top:0;
+			left:12px;
+			-moz-animation-delay:0.65s;
+			-webkit-animation-delay:0.65s;
+			-ms-animation-delay:0.65s;
+			-o-animation-delay:0.65s;
+			animation-delay:0.65s;
+		}
+		
+		#circularG_4{
+			right:3px;
+			top:3px;
+			-moz-animation-delay:0.78s;
+			-webkit-animation-delay:0.78s;
+			-ms-animation-delay:0.78s;
+			-o-animation-delay:0.78s;
+			animation-delay:0.78s;
+		}
+		
+		#circularG_5{
+			right:0;
+			top:12px;
+			-moz-animation-delay:0.91s;
+			-webkit-animation-delay:0.91s;
+			-ms-animation-delay:0.91s;
+			-o-animation-delay:0.91s;
+			animation-delay:0.91s;
+		}
+		
+		#circularG_6{
+			right:3px;
+			bottom:3px;
+			-moz-animation-delay:1.04s;
+			-webkit-animation-delay:1.04s;
+			-ms-animation-delay:1.04s;
+			-o-animation-delay:1.04s;
+			animation-delay:1.04s;
+		}
+		
+		#circularG_7{
+			left:12px;
+			bottom:0;
+			-moz-animation-delay:1.17s;
+			-webkit-animation-delay:1.17s;
+			-ms-animation-delay:1.17s;
+			-o-animation-delay:1.17s;
+			animation-delay:1.17s;
+		}
+		
+		#circularG_8{
+			left:3px;
+			bottom:3px;
+			-moz-animation-delay:1.3s;
+			-webkit-animation-delay:1.3s;
+			-ms-animation-delay:1.3s;
+			-o-animation-delay:1.3s;
+			animation-delay:1.3s;
+		}
+		
+		@-moz-keyframes bounce_circularG{
+			0%{
+			-moz-transform:scale(1)}
+		
+			100%{
+			-moz-transform:scale(.3)}
+		
+		}
+		
+		@-webkit-keyframes bounce_circularG{
+			0%{
+			-webkit-transform:scale(1)}
+		
+			100%{
+			-webkit-transform:scale(.3)}
+		
+		}
+		
+		@-ms-keyframes bounce_circularG{
+			0%{
+			-ms-transform:scale(1)}
+		
+			100%{
+			-ms-transform:scale(.3)}
+		
+		}
+		
+		@-o-keyframes bounce_circularG{
+			0%{
+			-o-transform:scale(1)}
+		
+			100%{
+			-o-transform:scale(.3)}
+		
+		}
+		
+		@keyframes bounce_circularG{
+			0%{
+			transform:scale(1)}
+		
+			100%{
+			transform:scale(.3)}
+		
+		}
+
+	
+		.spacer {
+		
+			margin-top: 50px;		  	
+		    max-width: 500px;
+		    margin-left: auto;
+    		margin-right: auto
+		
+		} 
+		 
+		.marg {
+					
+			margin-left: 5%;
+		    margin-right: 5%;
+			
+		}
+		
+		.spacerField {			   
+		    margin-top: 10px; /* define margin as you see fit */			  
+		}
+		
+		.spacerLoad {			   
+		    margin-top: 23px; /* define margin as you see fit */			  
+		}
+		
+		.spacerButton {			   
+		    margin-top: 50px; /* define margin as you see fit */
+		    margin-left: 50px;
+		    margin-right: 50px;		  
+		}
+	
+		
+	</style>
+	
+	<script>
+		
+		 $(document).ready(function() {
+
+		 	var arvoreI = $("#nivelI");
+	
+			<apex:repeat value="{!listNivelI}" var="arv">
+			
+	           	arvoreI.append( $('<option></option>').val("{!arv}").html("{!arv}") );			
+			
+			</apex:repeat>	
+			
+			$("#AbrirCaso").prop( "disabled", true );
+			$("#nvII").hide();
+			$("#nvIII").hide();	
+			
+			$("div[name=loadNvI]").hide();
+			$("div[name=loadNvII]").hide();
+			$("div[name=loadNvIII]").hide();	
+		
+		});
+		
+		$(function() {
+		
+			var validacaoNiveII = true;
+			var validacaoNiveIII = true;
+		
+			$("#nivelI").change(function() {
+			
+				var nivelSelecionado = $("#nivelI").val();
+			
+				$("#AbrirCaso").prop( "disabled", true );
+				
+				$("#nvII").hide();
+				$("#nvIII").hide();	
+				
+				$("#nivelII").empty();
+				$("#nivelIII").empty();
+				
+				if(nivelSelecionado != ''){
+				
+					$("div[name=loadNvI]").show();
+				
+					Visualforce.remoting.Manager.invokeAction(
+			            '{!$RemoteAction.ControllerArvoreAtendimento.carregarNivelII}',
+			             nivelSelecionado,		           
+			            		            
+			            function(result, event){
+			      			carregarNivelII(result);  		             		                
+			        });
+		        
+		        }
+				
+			});
+			
+			$("#nivelII").change(function() { 
+			
+				var nivelSelecionado = $("#nivelII").val();
+				
+				$("#AbrirCaso").prop( "disabled", true );
+			
+				$("#nvIII").hide();				
+				$("#nivelIII").empty();
+				
+				if(nivelSelecionado != ''){
+				
+					$("div[name=loadNvII]").show();
+					
+					Visualforce.remoting.Manager.invokeAction(
+			            '{!$RemoteAction.ControllerArvoreAtendimento.carregarNivelIII}',
+			             nivelSelecionado,		           
+			            		            
+			            function(result, event){
+			      			carregarNivelIII(result);  		             		                
+			        });
+				}
+				
+			});
+			
+			function carregarNivelII(result){
+			
+				var nivelII = $('#nivelII');		
+				nivelII.empty();
+				
+				nivelII.append( $('<option></option>').val('').html('') );	
+							
+				for (var i = 0; i < result.length; i++) {
+				
+	            	nivelII.append( $('<option></option>').val(result[i]).html(result[i]) );		
+					
+				}
+				
+				if(result.length > 0){
+
+					$("#nvII").show();
+					$("#AbrirCaso").prop( "disabled", true );								
+				}
+				else{
+					$("#AbrirCaso").prop( "disabled", false );		
+				}
+				
+				$("div[name=loadNvI]").hide();
+				
+			}
+			
+			function carregarNivelIII(result){
+				
+				var nivelIII = $('#nivelIII');		
+				nivelIII.empty();
+				
+				nivelIII.append( $('<option></option>').val('').html('') );
+									
+				for (var i = 0; i < result.length; i++) {
+				
+	            	nivelIII.append( $('<option></option>').val(result[i]).html(result[i]) );		
+					
+				}
+				
+				if(result.length > 0){
+
+					$("#nvIII").show();
+					$("#AbrirCaso").prop( "disabled", false );
+					
+				}
+				else{
+					$("#AbrirCaso").prop( "disabled", false );
+				}
+				
+				$("div[name=loadNvII]").hide();
+				
+			}
+			
+			function enviarParaPaginaCaso(tipoRegistro){
+				
+				var idConta = "{!idConta}"; 
+				var idContato = "{!idContato}";
+																 
+			    window.location.assign("/500/e?retURL=%2F500%2Fo&RecordType=" + tipoRegistro + "&ent=Case" + '&def_account_id=' + idConta + '&def_contact_id=' + idContato);
+			}
+			
+			$('#AbrirCaso').on('click', function(event) {
+			
+				if(validarAbrirCaso() == true){
+			
+					var nivelI   = $("#nivelI").val();
+					var nivelII  = $("#nivelII").val();
+					var nivelIII = $("#nivelIII").val();
+					
+					$(this).button('loading');
+	          			
+					Visualforce.remoting.Manager.invokeAction(
+			            '{!$RemoteAction.ControllerArvoreAtendimento.redirecionarCaso}',
+			             nivelI,
+			             nivelII,
+			             nivelIII,		           
+			            		            
+			            function(result, event){
+			            		            
+			            	enviarParaPaginaCaso(result);		      			 		             		                
+			        });
+		        }		     		    		 	    		
+	    			
+	    	});
+	    	
+	    	function validarAbrirCaso(){
+	    		
+	    		var validacao = true;
+	    		
+	    		var nivelI  = $("#nivelI").val();
+				var nivelII  = $("#nivelII").val();
+				var nivelIII = $("#nivelIII").val();
+				
+				if(nivelI == ''){
+	    			validacao = false;
+	    			alertaValidacao('Favor preencher o campo nivel I');
+	    		}
+	    		else if(validacaoNiveII == true &&  nivelII == ''){
+	    			validacao = false;
+	    			alertaValidacao('Favor preencher o campo nivel II');
+	    		}
+	    		else if(validacaoNiveIII == true &&  nivelIII == ''){
+	    			validacao = true;
+	    			alertaValidacao('Favor preencher o campo nivel III');
+	    		}
+	    		
+	    		return validacao;
+	    	
+	    	}
+	    	
+	    	function alertaValidacao(texto){
+			
+				var dialogInstance = new BootstrapDialog()
+	            dialogInstance.setTitle('Validação')
+	            dialogInstance.setMessage(texto)
+	            dialogInstance.setType(BootstrapDialog.TYPE_WARNING)
+	            .open();
+			}
+	
+		});
+	</script>
+	
+	
+	<apex:form id="Form">
+	
+		<nav class="navbar navbar-default" role="navigation"> 
+			<div class="container-fluid">	    	
+		    	<div class="navbar-header">
+		      		<a class="navbar-brand" href="">Árvore de Atendimento</a>   		
+		      		 		      	
+		    	</div>
+		    	
+		    	<div class="navbar-collapse collapse">
+	            	<ul class="nav navbar-nav">
+	                	              
+	            	</ul>	          
+	          	</div><!--/.nav-collapse -->
+			
+			</div>			
+		</nav>
+				
+		
+		<div class="marg">
+		
+			<div class="spacer">
+			
+				<div class="row spacerField">
+			
+					<div  id="nvI" class="col-md-11 col-xs-10 ">
+						<label class="control-label">Nivel I</label>
+						<select id="nivelI" class="form-control" >
+							<option value=""></option>								  
+						</select>								
+					</div>
+					
+					<div id="circularG" name="loadNvI" class="col-md-1 col-xs-1 spacerLoad">						
+						<div id="circularG_1" class="circularG"></div> 
+						<div id="circularG_2" class="circularG"></div>
+						<div id="circularG_3" class="circularG"></div>
+						<div id="circularG_4" class="circularG"></div>
+						<div id="circularG_5" class="circularG"></div>
+						<div id="circularG_6" class="circularG"></div>
+						<div id="circularG_7" class="circularG"></div>
+						<div id="circularG_8" class="circularG"></div>  
+					</div>
+										
+				</div>
+				
+				<div class="row spacerField">
+			
+					<div  id="nvII" class="col-md-11 col-xs-10 ">
+						<label class="control-label">Nivel II</label>
+						<select id="nivelII" class="form-control" >
+							<option value=""></option>								  
+						</select>								
+					</div>
+					
+					<div id="circularG" name="loadNvII" class="col-md-1 col-xs-1 spacerLoad">						
+						<div id="circularG_1" class="circularG"></div> 
+						<div id="circularG_2" class="circularG"></div>
+						<div id="circularG_3" class="circularG"></div>
+						<div id="circularG_4" class="circularG"></div>
+						<div id="circularG_5" class="circularG"></div>
+						<div id="circularG_6" class="circularG"></div>
+						<div id="circularG_7" class="circularG"></div>
+						<div id="circularG_8" class="circularG"></div>  
+					</div>
+										
+				</div>
+				
+				<div class="row spacerField">
+			
+					<div  id="nvIII" class="col-md-11 col-xs-10 ">
+						<label class="control-label">Nivel III</label>
+						<select id="nivelIII" class="form-control" >
+							<option value=""></option>								  
+						</select>								
+					</div>
+					
+					<div id="circularG" name="loadNvIII" class="col-md-1 col-xs-1 spacerLoad">						
+						<div id="circularG_1" class="circularG"></div> 
+						<div id="circularG_2" class="circularG"></div>
+						<div id="circularG_3" class="circularG"></div>
+						<div id="circularG_4" class="circularG"></div>
+						<div id="circularG_5" class="circularG"></div>
+						<div id="circularG_6" class="circularG"></div>
+						<div id="circularG_7" class="circularG"></div>
+						<div id="circularG_8" class="circularG"></div>  
+					</div>
+										
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="text-center spacerButton">		
+			<button id="AbrirCaso" type="button" data-loading-text="Direcionando..." class="btn btn-primary">Abrir Caso</button>	
+		</div>
+	
+	</apex:form>
+
+
+</apex:page>

@@ -1,0 +1,56 @@
+<apex:page Controller="ControllerDeploy">
+
+	<style type='text/css'>
+	    teste {
+    		height: 8800px;
+   		    width: 8800px;
+		}       
+	</style>
+
+	<apex:form id="Describe">
+
+			<table style="height: 500px; overflow: scroll">
+		        
+		        <tr>
+		    
+			        <td style="width: 500px"> 
+		
+				        <apex:datatable styleClass="list" value="{!listaConta}" var="rec">
+				
+				            <apex:column value="{!rec.Name}"/>
+				
+				        </apex:datatable> 
+			
+		   	 		</td>
+		   
+				    <td style="max-width: 900px; height: 500px; overflow: scroll;">
+				
+				        <apex:datatable value="{!listaConta}" var="rec" styleClass="list">
+				    		
+				            <apex:column style="teste" value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				            <apex:column value="{!rec.ID}"/>
+				    
+				        </apex:datatable>
+				
+				    </td>
+		
+		    	</tr>
+		
+			</table>
+
+		
+	</apex:form>
+	
+	
+	
+</apex:page>
